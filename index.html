@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+
+<div>
+
+  <div class="all">
+
+  <div class="top"><img src="https://beiz.jp/images_P/wallpaper/wallpaper_00022.jpg" alt="ホワイト" width="1350px" height="900px" ></div>
+
+    <div id="output"></div><br>
+
+  <div class="chat-container">
+    <div class="block">
+      <div>
+          <input type="text" id="uname" placeholder="名前を入力してください">
+      </div>
+      <div>
+          <textarea id="text" placeholder="文章を入力してください"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+      <button id="send">✈️</button>
+      <!-- style.cssに "overflow: auto;"を書いてみましょう！※最後に -->
+    
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="test.js"></script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js";
+        import { getDatabase, ref, push, set, onChildAdded, remove, onChildRemoved }
+          from "https://www.gstatic.com/firebasejs/10.6.0/firebase-database.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = api;
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app); //RealtimeDBに接続
+        const dbRef = ref(db, "chat"); //RealtimeDB内の"chat"を使う
+
+        //データ登録
+        //データ登録(Click)
+        $('#send').on('click', function () {
+            const uname = $('#uname').val();
+            const text = $('#text').val();
+
+            //コンソールで入力された文字が取得できるかチェック
+            console.log(uname, 'unameの文字')
+            console.log(text, 'textの文字')
+
+            //入力された文字が確認できた後は
+            //firebaseにデータを送るコードを記述する
+
+            const msg = {
+                //鍵の名前は自由！
+                uname: uname,
+                text: text,
+            }
+
+            //下記（push,setコード）は覚えるだけ！
+            //firebaseにデータを送る処理
+            //pushはfirebaseが用意したおまじない
+            const newPostRef = push(dbRef)
+            //setはfirebaseが用意したおまじない
+            set(newPostRef,msg);
+
+            //送信した後に入力された文字を消すには？
+            $('#uname').val("")
+            $('#text').val("");
+
+        });
+
+        let talkCount = 0; // トークの数をカウントする変数
+
+
+        //データ登録(Enter)
+
+        //最初にデータ取得＆onSnapshotでリアルタイムにデータを取得
+        //dataは仮名
+        onChildAdded(dbRef,function(data){
+            const msg = data.val();
+            talkCount++;
+
+            let html = `
+            <div class="talk ${talkCount % 2 === 0 ? 'even' : 'odd'}">
+        <p>${msg.uname}</p>
+        <p>${msg.text}</p>
+      </div>
+    `;
+
+            //画面に表示するために埋め込みます
+        $('#output').append(html)
+        });
+      </script>
+</body>
+</html>

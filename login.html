@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="login.css">
+    <title>Welcome to Firebase Hosting</title>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-auth.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
+<script src="test.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    const firebaseConfig = api;
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
+  </head>
+  <body>
+
+  <div class="all">
+    <div class="photo"><img src="https://assets.st-note.com/img/1664439631937-eHEm2gzYhU.jpg?width=2000&height=2000&fit=bounds&quality=85" alt="rogo" width="1350px" height="400px"></div>
+    <div class="img3"><img src="https://d.line-scdn.net/stf/linecorp/ja/pr/image_0404.png" alt="キャラ" width="800px" height="400px"></div>
+    <div id="message">
+      <div>
+        メールアドレス<input id="mail" type="mail" required/>
+      </div>
+      <div>
+        パスワード<input id="password" type="password" required/>
+      </div>
+        <button id="login">ログイン</button>
+        <button id="register">新規登録</button>
+    </div>
+  </div>
+
+    <script>
+    //新規登録処理
+    register.addEventListener('click', function(e) {
+        var mail = document.getElementById('mail').value;
+        var password = document.getElementById('password').value;
+        
+        firebase.auth().createUserWithEmailAndPassword(mail, password)
+        .catch(function(error) {
+          alert('登録できませんでした（' + error.code + error.message + '）');
+      });
+    });
+
+    //ログイン処理
+    login.addEventListener('click', function(e) {
+      var mail = document.getElementById('mail').value;
+      var password = document.getElementById('password').value;
+      
+      firebase.auth().signInWithEmailAndPassword(mail, password)
+      .then(user => {
+        alert("ログイン成功");
+        location.href="http://127.0.0.1:5500/index.html";
+      }, err => {
+        alert("ログインできませんでした");
+      });
+    });
+
+    </script>
+  </body>
+  
+</html>

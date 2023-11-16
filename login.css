@@ -1,0 +1,77 @@
+      .all {
+        max-width: 1350px;
+        margin: 0 auto;
+      }
+
+      .photo {
+        margin-bottom: 30px;
+      }
+
+      #message {
+        font-size: 30px;
+        text-align: center;
+      }
+
+      input {
+        font-size: 30px;
+      }
+
+      #login {
+        display: block;
+	    text-align: center;
+	    text-decoration: none;
+	    width: 150px;
+	    margin: 20px;
+	    padding: 1rem 2rem;
+	    font-weight: bold;
+	    border: 2px solid yellowgreen;
+	    background: yellowgreen;
+	    color: #fff;
+	    border-radius: 5px;
+	    transition: 0.5s;
+	    animation: move_c 1s infinite;
+        margin-left: 600px;
+       }
+
+       @keyframes move_c {
+        0% {transform: translate(0px, 0)}
+        50% {transform: translate(0px, 0) rotateZ(5deg)}
+       }
+
+       #login:hover {
+	    color: #27acd9;
+	    background: #fff;
+       }
+
+       #register {
+        display: block;
+	    text-align: center;
+	    text-decoration: none;
+	    width: 150px;
+	    margin: 20px;
+	    padding: 1rem 2rem;
+	    font-weight: bold;
+	    border: 2px solid yellowgreen;
+	    background: yellowgreen;
+	    color: #fff;
+	    border-radius: 5px;
+	    transition: 0.5s;
+	    animation: move_c 1s infinite;
+        margin-left: 600px;
+       }
+
+       @keyframes move_c {
+        0% {transform: translate(0px, 0)}
+        50% {transform: translate(0px, 0) rotateZ(5deg)}
+       }
+
+       #login:hover {
+	    color: #27acd9;
+	    background: #fff;
+       }
+
+       .img3 {
+        position: absolute;
+        top: 550px;
+        left: 350px;
+       }
